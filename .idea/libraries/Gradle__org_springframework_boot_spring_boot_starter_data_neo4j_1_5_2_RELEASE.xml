@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-data-neo4j:1.5.2.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-neo4j/1.5.2.RELEASE/90598aa491e9c90797732299f82acfcfb63d2cfc/spring-boot-starter-data-neo4j-1.5.2.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-neo4j/1.5.2.RELEASE/63833b56269f64b590ce8667fc9a1e3258160bab/spring-boot-starter-data-neo4j-1.5.2.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
