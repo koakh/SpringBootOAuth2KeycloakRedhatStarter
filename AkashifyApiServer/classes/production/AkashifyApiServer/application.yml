@@ -1,0 +1,18 @@
+server:
+  port: 8084
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+security:
+  oauth2:
+    client:
+      clientId: springboot-local
+      clientSecret: e6526cb3-b588-44da-966e-ac0e1d7a586b
+      accessTokenUri: http://koakh.com:8082/auth/realms/springboot/protocol/openid-connect/token
+      userAuthorizationUri: http://koakh.com:8082/auth/realms/springboot/protocol/openid-connect/auth
+      authenticationScheme: header
+      clientAuthenticationScheme: header
+    resource:
+      userInfoUri: http://koakh.com:8082/auth/realms/springboot/protocol/openid-connect/userinfo

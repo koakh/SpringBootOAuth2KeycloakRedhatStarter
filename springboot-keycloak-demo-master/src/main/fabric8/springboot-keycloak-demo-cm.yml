@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  application.yml: |
+    security:
+      oauth2:
+        client:
+          clientId: "${CLIENT_ID}"
+          clientSecret: "${CLIENT_SECRET}"
+          accessTokenUri: "${KEYCLOAK_URL}/auth/realms/@keycloak.realm@/protocol/openid-connect/token"
+          userAuthorizationUri: "${KEYCLOAK_URL}/auth/realms/@keycloak.realm@/protocol/openid-connect/auth"
+          authenticationScheme: header
+          clientAuthenticationScheme: header
+        resource:
+          userInfoUri: "${KEYCLOAK_URL}/auth/realms/@keycloak.realm@/protocol/openid-connect/userinfo"
+kind: ConfigMap
+metadata:
+  name: springboot-keycloak

@@ -1,0 +1,42 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	// packages
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-data-neo4j')
+	compile('org.springframework.data:spring-data-rest-hal-browser')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-websocket')
+	// webjars
+	compile("org.webjars:angularjs:1.4.3")
+	compile("org.webjars:jquery:2.1.1")
+	compile("org.webjars:bootstrap:3.2.0")
+	compile("org.webjars:webjars-locator:0.32")
+	// test
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
