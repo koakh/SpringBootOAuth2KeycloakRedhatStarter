@@ -448,3 +448,32 @@ try
 
 - [http://localhost:8443](http://localhost:8443)
 - [https://localhost:8443](https://localhost:8443)
+
+Change Springboot-local client
+
+**Root URL:**
+- https://localhost:8443
+
+**Valid Redirect URIs:**
+- nl.jpelgrm.retrofit2oauthrefresh://oauth
+- https://akashify.com:8443/*
+- https://localhost:8443/*
+
+**Web Origins:**
+- https://localhost:8443
+
+---
+### Add to Port Firewall and Forward Port in router  and test certificate 
+
+- [Trust Anchor not found for Android SSL Connection
+](http://stackoverflow.com/questions/6825226/trust-anchor-not-found-for-android-ssl-connection)
+
+https://www.digicert.com/help/
+Test
+https://akashify.com:8443
+
+https://github.com/dcm4che/dcm4chee-arc-light/wiki/Enabling-SSL-HTTPS-for-the-Keycloak-Server
+
+
+
+https://developer.android.com/training/articles/security-ssl.html#CommonProblems
