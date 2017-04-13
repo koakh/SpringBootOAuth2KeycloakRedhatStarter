@@ -374,3 +374,77 @@ payload
 ```
 
 Done Project Conversion
+
+---
+### [Enable HTTPS in Spring Boot](https://drissamri.be/blog/java/enable-https-in-spring-boot/)
+
+**Step 1: Get a SSL certificate**
+
+```
+cd c:\myData\Development\IntelliJIdeaProjects\SpringBootOAuth2KeycloakRedhatStarter
+keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048  -keystore keystore.p12 -validity 3650
+```
+
+! Follow error to get .p12 location path
+
+```
+[file:/C:/myData/Development/IntelliJIdeaProjects/SpringBootOAuth2KeycloakRedhatStarter/keystore.p12] due to [C:\myData\Development\IntelliJIdeaProjects\SpringBootOAuth2KeycloakRedhatStarter\keystore.p12 (O sistema não conseguiu localizar o ficheiro especificado)]
+```
+
+**Step 2: Enable HTTPS in Spring Boot**
+
+application.yml
+
+```yaml
+server:
+  #port: 8084
+  port: 8443
+  ssl:
+    key-store: keystore.p12
+    key-store-password: mypassword
+    keyStoreType: PKCS12
+    keyAlias: tomcat
+```
+
+**Step 3: Redirect HTTP to HTTPS (optional)**
+
+add class
+
+AkashifyApiServer\src\main\java\com\akashify\apiserver\ContainerConfiguration.java
+
+```java
+public class ContainerConfiguration {
+  @Bean
+  public EmbeddedServletContainerFactory servletContainer() {
+    TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
+      @Override
+      protected void postProcessContext(Context context) {
+        SecurityConstraint securityConstraint = new SecurityConstraint();
+        securityConstraint.setUserConstraint("CONFIDENTIAL");
+        SecurityCollection collection = new SecurityCollection();
+        collection.addPattern("/*");
+        securityConstraint.addCollection(collection);
+        context.addConstraint(securityConstraint);
+      }
+    };
+
+    tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
+    return tomcat;
+  }
+
+  private Connector initiateHttpConnector() {
+    Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+    connector.setScheme("http");
+    connector.setPort(8080);
+    connector.setSecure(false);
+    connector.setRedirectPort(8443);
+
+    return connector;
+  }
+}
+```
+
+try
+
+- [http://localhost:8443](http://localhost:8443)
+- [https://localhost:8443](https://localhost:8443)
