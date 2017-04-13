@@ -13,4 +13,3 @@ SpringBootOAuth2KeycloakRedhatStarter : A Starter for OAuth2 Clients Application
 - jerry:password
 - mickey:password
 - donald:password
-
