@@ -9,7 +9,6 @@ cd AkashifyApiServer
 gradlew bootRun
 ```
 
-
 run springboot-keycloak-demo-master
 
 ```

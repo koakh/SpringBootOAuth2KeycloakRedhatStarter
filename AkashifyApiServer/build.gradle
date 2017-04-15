@@ -21,17 +21,27 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	// packages
+compile('org.springframework.boot:spring-boot-starter-web') {
+	//exclude module: "spring-boot-starter-tomcat"
+}
+//compile 'org.apache.tomcat.embed:tomcat-embed-core:8.0.33'
+//compile 'org.apache.tomcat.embed:tomcat-embed-el:8.0.33'
+//compile 'org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33'
+//compile 'org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33'
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-neo4j')
 	compile('org.springframework.data:spring-data-rest-hal-browser')
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.security.oauth:spring-security-oauth2')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-websocket')
+	compile('org.springframework.boot:spring-boot-devtools')
+compile('org.springframework.boot:spring-boot-starter-security')
+compile('org.springframework.boot:spring-boot-starter-websocket')
+compile('org.springframework.security.oauth:spring-security-oauth2')
+	//keycloak adapter
+//compile('org.keycloak:keycloak-spring-boot-adapter:2.2.1.Final')
+//compile('org.keycloak:keycloak-tomcat8-adapter:2.2.1.Final')
+compile('org.springframework.security:spring-security-web')
 	// webjars
 	compile("org.webjars:angularjs:1.4.3")
 	compile("org.webjars:jquery:2.1.1")

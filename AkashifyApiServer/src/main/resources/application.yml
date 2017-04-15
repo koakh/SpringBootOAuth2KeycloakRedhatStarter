@@ -22,3 +22,19 @@ security:
       clientAuthenticationScheme: header
     resource:
       userInfoUri: http://koakh.com:8082/auth/realms/springboot/protocol/openid-connect/userinfo
+
+#keycloak:
+#  realm: springboot
+#  resource: springboot-backend
+#  auth-server-url: http://localhost:8082/auth
+#  ssl-required: external
+#  bearer-only: true
+#  credentials:
+#    secret : 289b6118-cc98-44f7-a6d6-89fa21057b2c
+#  securityConstraints:
+#    - securityCollections:
+#      - name: spring secured api
+#        authRoles:
+#            - admin
+#        patterns:
+#            - /user
