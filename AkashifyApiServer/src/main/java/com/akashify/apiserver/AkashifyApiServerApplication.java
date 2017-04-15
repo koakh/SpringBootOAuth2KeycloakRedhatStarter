@@ -2,17 +2,28 @@ package com.akashify.apiserver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -29,11 +40,8 @@ public class AkashifyApiServerApplication extends WebSecurityConfigurerAdapter {
     SpringApplication.run(AkashifyApiServerApplication.class, args);
   }
 
-
   @RequestMapping(value = "/user")
-  public Principal user(Principal principal) {
-    return principal;
-  }
+  public Principal user(Principal principal) { return principal; }
 
   /**
    * FIXME: make this as authorized
@@ -50,12 +58,12 @@ public class AkashifyApiServerApplication extends WebSecurityConfigurerAdapter {
 
     AppEnvironment appEnvironment = new AppEnvironment();
 
-    String kyeCloakUrl = System.getenv("KEYCLOAK_URL");
-    kyeCloakUrl = kyeCloakUrl == null ? "http://koakh.com:8082" : kyeCloakUrl;
+    String keyCloakUrl = System.getenv("KEYCLOAK_URL");
+    keyCloakUrl = keyCloakUrl == null ? "http://koakh.com:8082" : keyCloakUrl;
 
-    LOGGER.info("Using Key Cloak URL : {}", kyeCloakUrl);
+    LOGGER.info("Using Key Cloak URL : {}", keyCloakUrl);
 
-    appEnvironment.setKeyCloakUrl(kyeCloakUrl);
+    appEnvironment.setKeyCloakUrl(keyCloakUrl);
 
     String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 
@@ -71,6 +79,7 @@ public class AkashifyApiServerApplication extends WebSecurityConfigurerAdapter {
         .authenticated().and().exceptionHandling()
         .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
         .logoutSuccessUrl("/").permitAll()
-        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+    ;
   }
 }

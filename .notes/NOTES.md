@@ -463,7 +463,7 @@ Change Springboot-local client
 - https://localhost:8443
 
 ---
-### Add to Port Firewall and Forward Port in router  and test certificate 
+### Add to Port Firewall and Forward Port in router and test certificate 
 
 - [Trust Anchor not found for Android SSL Connection
 ](http://stackoverflow.com/questions/6825226/trust-anchor-not-found-for-android-ssl-connection)
@@ -471,9 +471,100 @@ Change Springboot-local client
 https://www.digicert.com/help/
 Test
 https://akashify.com:8443
-
 https://github.com/dcm4che/dcm4chee-arc-light/wiki/Enabling-SSL-HTTPS-for-the-Keycloak-Server
-
-
-
 https://developer.android.com/training/articles/security-ssl.html#CommonProblems
+
+---- 
+#### Curl
+
+Getting started with Keycloak - Securing a REST Service
+http://blog.keycloak.org/2015/10/getting-started-with-keycloak-securing.html
+
+Obtain Token and Invoke Service
+
+curl --data "grant_type=password&client_id=springboot-local&client_secret=e6526cb3-b588-44da-966e-ac0e1d7a586b&username=tom&password=password" 
+http://localhost:8082/auth/realms/springboot/protocol/openid-connect/token
+
+Now that we have the token we can invoke the secured service. To do this run:
+
+http
+
+https
+curl https://localhost:8443/user -H "Authorization: bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJac2hmTUR...."
+
+curl -i -H "Content-Type: application/json" -H "X-Auth-Token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJac2hmTURSUlJYTzF6N2I2TTVnSm5JZUZ6Mk14cVZTWndnTHZIM0NWRV9VIn0.eyJqdGkiOiJjNjFmZDc4Yy1hZDU0LTRmNmEtYTNhNS1lZTgyNDg0MWExY2MiLCJleHAiOjE0OTIxOTg1MDcsIm5iZiI6MCwiaWF0IjoxNDkyMTk4MjA3LCJpc3MiOiJodHRwOi8va29ha2guY29tOjgwODIvYXV0aC9yZWFsbXMvc3ByaW5nYm9vdCIsImF1ZCI6InNwcmluZ2Jvb3QtbG9jYWwiLCJzdWIiOiIyMjcwM2Q0MC1lNDkwLTRlZGYtYTI1MS1jMDRhZDZjZDFmNmQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzcHJpbmdib290LWxvY2FsIiwiYXV0aF90aW1lIjoxNDkyMTk4MjA3LCJzZXNzaW9uX3N0YXRlIjoiYWM0Y2NmODctYTU0Yy00MjM2LThlYWUtNjg3ZmNjZmU3OGI0IiwiYWNyIjoiMSIsImNsaWVudF9zZXNzaW9uIjoiZWEzYzVhZTAtZmZlZi00NTk2LWI1YzAtNzU4OGE5NDc2NGRmIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vbG9jYWxob3N0Ojg0NDMiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sIm5hbWUiOiJN77-977-9cmlvIE1vbnRlaXJvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyaW9hbW1vbnRlaXJvQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJN77-977-9cmlvIiwiZmFtaWx5X25hbWUiOiJNb250ZWlybyIsImVtYWlsIjoibWFyaW9hbW1vbnRlaXJvQGdtYWlsLmNvbSJ9.iDM-uQAgbWOO-D9BaKZnNPSxYzvDkODo5mkJa7UwI3-4JQidHEt9YyXOwsMIJYWpVCpJrAs4puOiCaoqHsg7u5NH2F2gYwTr38ljR7VFd_fABJcgMNaRxk4MhCPzrDu4wcKRFHj2M7VrZ1IWEwosAwAsP_JojuMW2Ycm0PB9T6EGMMFa_MkJEoCtQftA_vxE3-abeEPKimF_1TC7ZYtaIfjWBj_gEiI2ZRv00Uyl8HrmEMYxluIHAm-3yTYEtpbpLE-iCOy0lzY55uOgIrTB9hZOtRWMmLXShY2ZIlaca1e6cHdPswlJwz_xWaP9PQxKeSAWjZrzMz-seR3rJ38r7w" -X GET http://www.akashify.com:8084/user
+
+curl -i -H "Content-Type: application/json" -H "X-Auth-Token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJac2hmTURSUlJYTzF6N2I2TTVnSm5JZUZ6Mk14cVZTWndnTHZIM0NWRV9VIn0.eyJqdGkiOiJlOGQwYTg4MC1hOGNiLTQ5OTMtYTk2YS05NDYxYmFlY2YyMmQiLCJleHAiOjE0OTIxOTg3ODUsIm5iZiI6MCwiaWF0IjoxNDkyMTk4NDg1LCJpc3MiOiJodHRwOi8va29ha2guY29tOjgwODIvYXV0aC9yZWFsbXMvc3ByaW5nYm9vdCIsImF1ZCI6InNwcmluZ2Jvb3QtbG9jYWwiLCJzdWIiOiIyMjcwM2Q0MC1lNDkwLTRlZGYtYTI1MS1jMDRhZDZjZDFmNmQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzcHJpbmdib290LWxvY2FsIiwiYXV0aF90aW1lIjoxNDkyMTk4MjA3LCJzZXNzaW9uX3N0YXRlIjoiYWM0Y2NmODctYTU0Yy00MjM2LThlYWUtNjg3ZmNjZmU3OGI0IiwiYWNyIjoiMCIsImNsaWVudF9zZXNzaW9uIjoiYzA5YzBjNzktYjg1Yy00MDA4LTg4MmUtM2FhZGQ2OGE3ZGZhIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vbG9jYWxob3N0Ojg0NDMiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sIm5hbWUiOiJN77-977-9cmlvIE1vbnRlaXJvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibWFyaW9hbW1vbnRlaXJvQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJN77-977-9cmlvIiwiZmFtaWx5X25hbWUiOiJNb250ZWlybyIsImVtYWlsIjoibWFyaW9hbW1vbnRlaXJvQGdtYWlsLmNvbSJ9.MDthReroZGz5hPQKfu71aPG0hbUjY_khsrMe9XRmdn87qXQpVP5DvYx8Vz1A9958oDysQ_uQZhQOfEs4vktAba5t03JGfa3cs1oNuF4RHf-jbU8WuLCuuHNCalYQ_v0DjVmxJt_5pI91c-UVsmfV1s3TLXvDTMbTdtE83wyiJGJWGLSA6HnRETdcRQSIUvqx4avYM4dMD8ij3POgvf1x4ACNYI1Vv1__euG6EQdcnv7_fGIdDhD5nip6K6EoLHvQB6OK0461Sac0ar6Uo9EpgBKkaIx7EHtSIJnf_b_Q-xHKhL9Sd_tP5Dax3y_OCM8t97bOGfVNaTA3rHyMwvXnyQ" -X GET http://localhost:8084/user
+
+Authentication with Spring Boot, AngularJS and Keycloak (Source in GitHub)
+http://slackspace.de/articles/authentication-with-spring-boot-angularjs-and-keycloak/
+
+
+
+
+
+OpenID Connect Discovery
+GET /.well-known/openid-configuration
+GET /{realm}/.well-known/openid-configuration
+
+http://koakh.com:8082/auth/realms/springboot/.well-known/openid-configuration
+
+go to realm and click in link: Endpoints OpenID Endpoint Configuration
+
+Browser test login
+
+
+
+REQUIRE CLIENT TO BE PUBLIC, to not send secret
+
+
+
+GREAT LINK
+http://stackoverflow.com/questions/33377971/oauth2-spring-security-authorization-code
+
+
+Get Code
+http://koakh.com:8082/auth/realms/springboot/protocol/openid-connect/auth?client_id=springboot-local&scope=no_expiry,write_access&redirect_uri=http://localhost:8084&response_type=code
+Returns URL: http://localhost:8084/?code=AZ8EbRBbqyRIESqGcedXgt48qyJX6m3FGDWu2uc24QI.ed6441d0-3e4e-475b-ae9c-414bc8462494
+With Code = AZ8EbRBbqyRIESqGcedXgt48qyJX6m3FGDWu2uc24QI.ed6441d0-3e4e-475b-ae9c-414bc8462494
+
+After the login process (login: user password: password), you will be redirected to http://example.com/?code=CODE <-- this is the code that you should use in the next request
+
+now that you get the token use it to get authorization_code
+
+Using the code to get authorization_code
+
+curl -X POST http://localhost:8082/auth/realms/springboot/protocol/openid-connect/token -d "grant_type=authorization_code&client_id=springboot-local&redirect_uri=http://localhost:8084&code=7PjT7wl4U8CSAyT0xmPYWUdDa7uHAzHy7WB8FnAe-3E.6197b6eb-8487-4f2f-8551-82d9f88295e8"
+
+returns token with code
+
+eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJac2hmTURSUlJYTzF6N2I2TTVnSm5JZUZ6Mk14cVZTWndnTHZIM0NWRV9VIn0.eyJqdGkiOiIwYjY5MTkyZS1lMjBmLTQxZGItYWQ4Mi1iZjMxNmE2ODI3OGMiLCJleHAiOjE0OTIyNzYwNDksIm5iZiI6MCwiaWF0IjoxNDkyMjc1NzQ5LCJpc3MiOiJodHRwOi8va29ha2guY29tOjgwODIvYXV0aC9yZWFsbXMvc3ByaW5nYm9vdCIsImF1ZCI6InNwcmluZ2Jvb3QtbG9jYWwiLCJzdWIiOiIzMjNiZGRmZS04ODlkLTQzODAtODM2Yy0wNjA2YTA1ZjU2ODMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzcHJpbmdib290LWxvY2FsIiwiYXV0aF90aW1lIjoxNDkyMjc1NzM0LCJzZXNzaW9uX3N0YXRlIjoiMjIxMDllNjQtNmM3ZS00ZWYzLWE0MTQtODVjZjMwNWYwMGZlIiwiYWNyIjoiMSIsImNsaWVudF9zZXNzaW9uIjoiNjE5N2I2ZWItODQ4Ny00ZjJmLTg1NTEtODJkOWY4ODI5NWU4IiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vbG9jYWxob3N0Ojg0NDMiXSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJuYW1lIjoiVG9tIENhdCIsInByZWZlcnJlZF91c2VybmFtZSI6InRvbSIsImdpdmVuX25hbWUiOiJUb20iLCJmYW1pbHlfbmFtZSI6IkNhdCIsImVtYWlsIjoidG9tLmNhdEBleGFtcGxlLmNvbSJ9.sC33o8GHkfia184RnjYH3Sqeu2MaqjdjRhhh-OfXBMYI_p3Bh2gM9o7wRcWZY869hfcn55a7Vp3Lb5OgsYXIl5RB3GAFtjbzkdam2GpfhJ_QYVo1PR-mlPx0PcLF1sA9wryzLMdng4tAvhvm2kkjbvFiDb1cRfkldxnHqMP_n-lB24oNVZGDpbbCQA3V7C7NnChQiEorn5NZPXneIdzCsHvtkabW5h9pnMEXFaUCUZlNXTN023LrC2Y22CekHBXnWwUO8DI8YhZy1M32tAp86yPyKR6PTuZABUY3xSdEDPx2v2b2hrd8GbryggkwxSoKTCMYSvRx4d20fGOL5uSxXw
+
+
+
+
+
+
+Using the password grantType
+curl springboot-local:e6526cb3-b588-44da-966e-ac0e1d7a586b@koakh.com:8082/auth/realms/springboot/protocol/openid-connect/token -d grant_type=password -d username=tom -d password=password
+
+"response_types_supported": [
+"code",
+"none",
+"id_token",
+"token",
+"id_token token",
+"code id_token",
+"code token",
+"code id_token token"
+]
+
+response_type=code returns in browser 
+http://akashify.com:8084/?code=SEvZCzU5dlSTgqFgfpXVV2H2FxY5W0NeH5l_tuBtw58.154e9d1e-601e-4431-aad6-309f68e2fea6
+
+require implicit flow enable
+http://koakh.com:8082/auth/realms/springboot/protocol/openid-connect/auth?client_id=springboot-local&scope=no_expiry,write_access&redirect_uri=http://akashify.com:8084&response_type=id_token
+
+
+
+http://stackoverflow.com/questions/33377971/oauth2-spring-security-authorization-code
