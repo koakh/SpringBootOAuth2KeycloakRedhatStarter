@@ -28,7 +28,7 @@
     <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
     <fabric8-maven-plugin.version>3.2.1</fabric8-maven-plugin.version>
     <fabric8-arquillian.version>2.2.176</fabric8-arquillian.version>
-    <slf4j-api.version>1.7.21</slf4j-api.version>
+    <slf4j-api.version>1.7.30</slf4j-api.version>
   </properties>
 
   <dependencyManagement>
